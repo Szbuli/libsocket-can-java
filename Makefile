@@ -57,8 +57,10 @@ stamps/compile-test: stamps/compile-src $(JAVA_TEST_SRC)
 	@touch $@
 
 stamps/generate-jni-h: stamps/compile-src
-	$(JAVAH) -jni -d $(JNI_DIR) -classpath $(JAVA_DEST) \
-		$(JNI_CLASSES)
+	# use for JDK <= 9
+	#$(JAVAH) -jni -d $(JNI_DIR) -classpath $(JAVA_DEST) $(JNI_CLASSES) 
+	# use for JDK > 10 (javah was removed and integrated to javac with parameter -h)
+	$(JAVAC) $(JAVA_SRC) -h $(JNI_DIR) -d $(JAVA_DEST)
 	@touch $@
 
 stamps/compile-jni: stamps/generate-jni-h $(JNI_SRC)
