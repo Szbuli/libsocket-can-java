@@ -4,11 +4,15 @@ I've found no documentation how to use the entropia libsocket-can-java JNI-Libra
 Get SocketCan running on the Pi, so it shows up "can0" interface in `ifconfig`. You will find a tutorial for this. If it is running, do the following:
 
 1. Clone the libsocket-can-java Library to the Raspberry Pi 3 with `git clone` (There is a Makefile in the cloned directory. It contains all info to compile the C Library as an .so "Shared Library")
-2. Compile it with commandline `make` (This requires at least a C compiler like gcc)
+2. Compile it with commandline `make` (This requires at least a C compiler like gcc) -> Notice my advice 'JDK Version'
 3. In the folder the file `lib/libjni_socketcan.so` was created. Copy this shared library file to `/usr/lib`. Linux and the Java programm will find it there now.
 4. Create a Java program to test it.
 
 In Java you import the `CanSocket.java` class to your project. An example how you can use it:
+
+## JDK Version and compile errors with javah
+In JDK 10 the `javah` compiler was removed. It was set deprecated in JDK 9(?) and replaced by using `javac -h`.
+**I changed the Makefile (line 60-63) to work with the `javac -h` because i'm using JDK 11 now. If you have trouble with it/using JDK 8, comment in the other line for your JDK version.**
 
 ## Java Example
 ```java
@@ -62,6 +66,7 @@ public class Main {
     }
 }
 ```
+
 ## Notice
 I can't serve any help and won't improve it, I am not working on it - I only use it and wanted to share my way how to get it work.
 
