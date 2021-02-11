@@ -17,10 +17,14 @@ In JDK 10 the `javah` compiler was removed. It was set deprecated in JDK 9(?) an
 ## Linux kernel v5
 After switching to the kernel v5.10 on Raspberry the error 'java.lang.IllegalArgumentException: illegal AF_CAN address' occured on the same hardware and Java setup. The problem was caused by old include files for compiling. 
 The include files in this repo are a copy of some files in the linux repo:
+```
 linux\include\uapi\linux\can.h
 linux\include\uapi\linux\can\*
+```
 
 I replaced them with the new ones and after compiling it, it seem to work now again, see commit with tag v5.10.
+
+*If such issues happen again in future: Try to do the same I explained above, replace the include files with the matching version of the linux files and try it.*
 
 ## Java Example
 ```java
