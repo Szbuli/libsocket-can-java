@@ -14,6 +14,14 @@ In Java you import the `CanSocket.java` class to your project. An example how yo
 In JDK 10 the `javah` compiler was removed. It was set deprecated in JDK 9(?) and replaced by using `javac -h`.
 **I changed the Makefile (line 60-63) to work with the `javac -h` because i'm using JDK 11 now. If you have trouble with it/using JDK 8, comment in the other line for your JDK version.**
 
+## Linux kernel v5
+After switching to the kernel v5.10 on Raspberry the error 'java.lang.IllegalArgumentException: illegal AF_CAN address' occured on the same hardware and Java setup. The problem was caused by old include files for compiling. 
+The include files in this repo are a copy of some files in the linux repo:
+linux\include\uapi\linux\can.h
+linux\include\uapi\linux\can\*
+
+I replaced them with the new ones and after compiling it, it seem to work now again, see commit with tag v5.10.
+
 ## Java Example
 ```java
 public class Main {
